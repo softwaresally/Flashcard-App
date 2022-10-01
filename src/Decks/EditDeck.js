@@ -18,6 +18,7 @@ function EditDeck() {
             abortController.abort();
         }
     }, [deckId]);
+    console.log(deck);
 
     async function submitHandler(event) {
         event.preventDefault();
