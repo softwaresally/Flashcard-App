@@ -4,8 +4,8 @@ import { readCard, readDeck, updateCard } from "../utils/api";
 
 function EditCard() {
     const { deckId, cardId } = useParams();
-    const [deck, setDeck] = useState([]);
-    const [card, setCard] = useState([]);
+    const [deck, setDeck] = useState({ name: "", description: "", id: "", cards: [] });
+    const [card, setCard] = useState({ front: "", back: "", deckId: "", id: "" });
     const history = useHistory();
 
     // get card from API

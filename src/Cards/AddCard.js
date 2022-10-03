@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { createCard, readDeck } from "../utils/api";
-import CardList from "./CardList";
 
-function AddCard({ card }) {
+function AddCard() {
     const { deckId } = useParams();
     const [deck, setDeck] = useState([]);
     const initialFormState = {
@@ -11,7 +10,6 @@ function AddCard({ card }) {
         back: "",
     };
     const [newCard, setNewCard] = useState({ ...initialFormState });
-    const history = useHistory();
 
     // get deck from API
     useEffect(() => {
@@ -27,7 +25,7 @@ function AddCard({ card }) {
     }, [deckId]);
 
     //submit handler for submit button onClick
-    const submitHandler = async (event) => {
+    const submitHandler = async () => {
         await createCard(deckId, newCard);
         setNewCard({ ...initialFormState });
     };

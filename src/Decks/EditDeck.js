@@ -4,7 +4,7 @@ import { readDeck, updateDeck } from "../utils/api";
 
 function EditDeck() {
     const { deckId } = useParams();
-    const [deck, setDeck] = useState([]);
+    const [deck, setDeck] = useState({ name: "", description: "", id: "", cards: [] });
     const history = useHistory();
 
     useEffect(() => {
@@ -73,6 +73,7 @@ function EditDeck() {
                         style={{ width: "100%" }}
                         value={deck.name}
                         onChange={nameHandler}
+                        className="form-control"
                     />
 
                     <label>Description</label>
@@ -84,6 +85,7 @@ function EditDeck() {
                         style={{ width: "100%" }}
                         value={deck.description}
                         onChange={descriptionHandler}
+                        className="form-control"
                     />
 
                     <Link to={`/decks/${deckId}`} className="btn btn-secondary">
