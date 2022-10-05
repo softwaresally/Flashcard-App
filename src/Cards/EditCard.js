@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { readCard, readDeck, updateCard } from "../utils/api";
+import CardForm from "./CardForm";
 
 function EditCard() {
     const { deckId, cardId } = useParams();
@@ -40,11 +41,25 @@ function EditCard() {
         history.push(`/decks/${deck.id}`);
     }
 
-    const changeHandler = (event) => {
+    // const changeHandler = ({ target }) => {
+    //     setCard({
+    //         ...card,
+    //         [target.name]: target.value,
+    //     });
+    // }
+
+    const frontHandler = ({ target }) => {
         setCard({
             ...card,
-            [event.target.name]: event.target.value,
-        });
+            front: target.value,
+        })
+    }
+
+    const backHandler = ({ target }) => {
+        setCard({
+            ...card,
+            back: target.value,
+        })
     }
 
     return (
@@ -69,39 +84,24 @@ function EditCard() {
                 </ul>
             </nav>
 
-            <form onSubmit={submitHandler}>
-                <h2>Edit Card</h2>
-
-                <div className="form-group">
-                    <label>Front</label>
-                    <textarea
-                        id="front"
-                        name="front"
-                        type="text"
-                        style={{ width: "100%" }}
-                        value={card.front}
-                        onChange={changeHandler}
-                    />
-
-                    <label>Back</label>
-                    <textarea
-                        id="back"
-                        name="back"
-                        type="text"
-                        style={{ width: "100%" }}
-                        value={card.back}
-                        onChange={changeHandler}
-                    />
-
-                    <Link to={`/decks/${deckId}`} className="btn btn-secondary">
-                        Cancel
-                    </Link>
-
-                    <button onSubmit={submitHandler} type="submit" className="btn btn-primary">
-                        Submit
-                    </button>
+            <div className="card">
+                <div className="card-body">
+                    <div className="card-title">
+                        <h2>Edit Card</h2>
+                    </div>
+                    <CardForm card={card} frontHandler={frontHandler} backHandler={backHandler} />
                 </div>
-            </form>
+            </div>
+
+                
+
+            <Link to={`/decks/${deckId}`} className="btn btn-secondary">
+                Cancel
+            </Link>
+
+            <button onClick={submitHandler} type="submit" className="btn btn-primary">
+                Submit
+            </button>
         </div>
     )
 }

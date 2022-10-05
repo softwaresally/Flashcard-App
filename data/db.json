@@ -66,16 +66,22 @@
       "id": 9
     },
     {
-      "front": "New Deck front of card",
-      "back": "New Deck back of card",
+      "front": "New Deck front of card 2 mil",
+      "back": "New Deck back of card 2 mil",
       "deckId": 3,
       "id": 10
     },
     {
-      "front": "card 1 front changed",
+      "front": "card 1 front changed new",
       "back": "card 1 back changed",
       "deckId": 4,
       "id": 11
+    },
+    {
+      "front": "front card 2 mil",
+      "back": "back card 2 mil",
+      "deckId": 4,
+      "id": 12
     }
   ]
 }

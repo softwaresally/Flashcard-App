@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { createCard, readDeck } from "../utils/api";
+import CardForm from "./CardForm";
 
 function AddCard() {
     const { deckId } = useParams();
-    const [deck, setDeck] = useState([]);
+    const [deck, setDeck] = useState({ name: "", description: "", id: "", cards: [] });
     const initialFormState = {
         front: "",
         back: "",
     };
-    const [newCard, setNewCard] = useState({ ...initialFormState });
+    const [card, setCard] = useState({ ...initialFormState });
 
     // get deck from API
     useEffect(() => {
@@ -26,24 +27,22 @@ function AddCard() {
 
     //submit handler for submit button onClick
     const submitHandler = async () => {
-        await createCard(deckId, newCard);
-        setNewCard({ ...initialFormState });
+        await createCard(deckId, card);
+        setCard({ ...initialFormState });
     };
 
-    //front handler
-    const handleFront = ({target}) => {
-        setNewCard({
-            ...newCard,
+    const frontHandler = ({ target }) => {
+        setCard({
+            ...card,
             front: target.value,
-        });
+        })
     }
 
-    // back handler
-    const handleBack = ({target}) => {
-        setNewCard({
-            ...newCard,
+    const backHandler = ({ target }) => {
+        setCard({
+            ...card,
             back: target.value,
-        });
+        })
     }
 
     return (
@@ -68,45 +67,17 @@ function AddCard() {
                 </ul>
             </nav>
 
-            <form onSubmit={submitHandler}>
-                
-                <h4>{deck.name}: Add Card</h4>
+            <h4>{deck.name}: Add Card</h4>
+            
+            <CardForm frontHandler={frontHandler} backHandler={backHandler} card={card} />    
 
-                <div className="form-group">
-
-                    <label>Front</label>
-                    <textarea
-                        id="front"
-                        rows="3"
-                        type="textarea"
-                        name="front"
-                        style={{ width: "100%" }}
-                        placeholder="Front side of card"
-                        onChange={handleFront}
-                    />
-
-                    <br />
-
-                    <label>Back</label>
-                    <textarea
-                        id="back"
-                        rows="3"
-                        type="textarea"
-                        name="back"
-                        style={{ width: "100%" }}
-                        placeholder="Back side of card"
-                        onChange={handleBack}
-                    />
-
-                    <Link to={`/decks/${deckId}`} className="btn btn-secondary">
-                        Done
-                    </Link>
+            <Link to={`/decks/${deckId}`} className="btn btn-secondary">
+                Done
+            </Link>
                     
-                    <button onClick={submitHandler} type="submit" className="btn btn-primary">
-                        Save
-                    </button>
-                </div>
-            </form>
+            <button onClick={submitHandler} type="submit" className="btn btn-primary">
+                Save
+            </button>
         </div>
     )
 }

@@ -7,7 +7,6 @@ import Header from "./Header";
 import Home from "./Home";
 import DeckView from "../Decks/DeckView";
 import NotFound from "./NotFound";
-import Study from "./Study";
 import AddCard from "../Cards/AddCard";
 import DeckStudy from "../Decks/DeckStudy";
 

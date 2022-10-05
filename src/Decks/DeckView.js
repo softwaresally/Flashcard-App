@@ -6,7 +6,7 @@ import { readDeck, deleteDeck } from "../utils/api";
 function DeckView() {
     const { deckId } = useParams();
     const [deck, setDeck] = useState({cards: []});
-    const { id, name, description, cards } = deck;
+    const { name, description, cards } = deck;
     const history = useHistory();
 
     // get a deck from the API
